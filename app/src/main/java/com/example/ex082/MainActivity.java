@@ -12,16 +12,13 @@ import android.widget.Toast;
 /**
  * @author    Ori Roitzaid <or1901 @ bs.amalnet.k12.il>
  * @version	  1
- * @since	  4/5/2023
+ * @since	  4/9/2023
  * An activity that collects data of a mathematical series, and sends it to another activity.
  */
 public class MainActivity extends AppCompatActivity {
-    RadioButton ariRb;
-    RadioButton geoRb;
-    EditText firstValueEt;
-    EditText diffQuotEt;
-    String firstValueStr;
-    String diffQuotStr;
+    RadioButton ariRb, geoRb;
+    EditText firstValueEt, diffQuotEt;
+    String firstValueStr, diffQuotStr;
     Intent si;
     int seriesType;
 
@@ -49,12 +46,17 @@ public class MainActivity extends AppCompatActivity {
             si = new Intent(this, ResultsActivity.class);
 
             seriesType = getSeriesType();
+            firstValueStr = firstValueEt.getText().toString();
+            diffQuotStr = diffQuotEt.getText().toString();
 
             si.putExtra("Type", seriesType);
+            si.putExtra("First", Double.parseDouble(firstValueStr));
+            si.putExtra("Diff", Double.parseDouble(diffQuotStr));
+
             startActivity(si);
         }
         else {
-            Toast.makeText(this, "There is an empty field!", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "There is an empty field!", Toast.LENGTH_SHORT).show();
         }
     }
 
